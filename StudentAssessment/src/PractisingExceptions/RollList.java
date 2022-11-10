@@ -14,7 +14,7 @@ public class RollList {
 		rollList = new Student[totalRoll];
 	}
 	
-	//method to check the number of rolls
+	//method to check the number of rolls intered
 	public void inputRollNo(Student student, int index) throws RollNoException{
 		for (int i = 0; i < index; i++) {
 			if (rollList[i].getRollNo() == (student.getRollNo())) {

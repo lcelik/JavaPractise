@@ -38,6 +38,7 @@ public class StudentMain {
 	 }
 	 
 	 rollList.displayRollNo();
+	 
 	} catch (RollNoException exception) {
 		System.out.println(exception.getMessage());
 	} catch (AgeException exception) {

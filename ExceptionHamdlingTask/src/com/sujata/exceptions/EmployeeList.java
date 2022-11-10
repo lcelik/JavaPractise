@@ -15,7 +15,6 @@ public class EmployeeList {
 	}
 	
 	public void inputEmployee(Employee employee, int index) throws NameCheckedException {
-		
 		for ( int i = 0; i < index; i++) {
 			if (empList[i].getName().equals(employee.getName())) {
 				throw new NameCheckedException("Duplicate name entered");
