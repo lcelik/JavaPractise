@@ -10,10 +10,12 @@ import org.junit.jupiter.api.Test;
 
 import com.sujata.entity.Employee;
 import com.sujata.persistence.EmployeeDaoImpl;
+import com.sujata.service.EmployeeServiceImpl;
 
 class EmployeeDaoTest {
 	
-	EmployeeDaoImpl employeeDaoImpl;
+	
+	 EmployeeDaoImpl employeeDaoImpl;
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -30,24 +32,24 @@ class EmployeeDaoTest {
 		assertTrue(employeeDaoImpl.getAllRecords().size()>0);
 	}
 
-	@Test
-	void testSearchRecord() {
-		fail("Not yet implemented");
-	}
+//	@Test
+//	void testSearchRecord() {
+//		fail("Not yet implemented");
+//	}
 
 	@Test
 	void testInsertRecord() {
-		assertEquals(1, employeeDaoImpl.insertRecord(new Employee(108,"HHHH","Executive","Sales",34000,LocalDate.now())));
+		assertEquals(1, employeeDaoImpl.insertRecord(new Employee(110,"HHHG","Executive","Sales",45000,LocalDate.now())));
 	}
 
-	@Test
-	void testDeleteRecord() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testUpdateSalary() {
-		fail("Not yet implemented");
-	}
+//	@Test
+//	void testDeleteRecord() {
+//		fail("Not yet implemented");
+//	}
+//
+//	@Test
+//	void testUpdateSalary() {
+//		fail("Not yet implemented");
+//	}
 
 }

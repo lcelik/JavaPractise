@@ -7,10 +7,15 @@ import com.sujata.entity.EmployeePaySlip;
 import com.sujata.persistence.EmployeeDao;
 import com.sujata.persistence.EmployeeDaoImpl;
 
+import lombok.Setter;
+
 public class EmployeeServiceImpl implements EmployeeService {
 
 	//Service will request persistence layer for all data needs
-	private EmployeeDao employeeDao=new EmployeeDaoImpl();
+//	private EmployeeDao employeeDao=new EmployeeDaoImpl();
+	
+	@Setter
+	private EmployeeDao employeeDao;
 	
 	@Override
 	public Collection<Employee> getAllEmployees() {
