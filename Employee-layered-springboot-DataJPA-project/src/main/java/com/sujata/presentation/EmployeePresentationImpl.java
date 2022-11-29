@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.Collection;
+import java.util.List;
 import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,11 @@ public class EmployeePresentationImpl implements EmployeePresentation  {
 		System.out.println("4. Delete Employee");
 		System.out.println("5. Increment Salary");
 		System.out.println("6. Generate PaySlip");
-		System.out.println("7. Exit");
+		System.out.println("7. Search Employees By Department");
+		System.out.println("8. Search Employees By Salary greter than 50000");
+		System.out.println("9. Search Employees By Designation");
+		System.out.println("10. Delete Employee By Name");
+		System.out.println("11. Exit");
 		System.out.println("============================");
 
 	}
@@ -55,6 +60,7 @@ public class EmployeePresentationImpl implements EmployeePresentation  {
 			else
 				System.out.println("Employee with id "+id+" doesnot exist");
 			break;
+			
 		case 3:
 			Employee newEmployee=new Employee();
 			
@@ -80,6 +86,7 @@ public class EmployeePresentationImpl implements EmployeePresentation  {
 				System.out.println("Employee with id "+newEmployee.getEmpId()+" already exist, so cannot add it as a new employee!");
 			
 			break;
+			
 		case 4:
 			System.out.println("Enter Employee ID : ");
 			int eId=scanner.nextInt();
@@ -88,7 +95,9 @@ public class EmployeePresentationImpl implements EmployeePresentation  {
 			else
 				System.out.println("Employee with id "+eId+" does not exist");
 			break;
+			
 		case 5:
+			
 			System.out.println("Enter Employee ID : ");
 			int empId=scanner.nextInt();
 			System.out.println("Enter Increment Amount : ");
@@ -98,7 +107,9 @@ public class EmployeePresentationImpl implements EmployeePresentation  {
 			else
 				System.out.println("Employee with ID "+empId+" does not exist");
 			break;
+			
 		case 6:
+			
 			System.out.println("Enter Employee ID : ");
 			int employeeId=scanner.nextInt();
 			EmployeePaySlip payslip=employeeService.generatePaySlip(employeeId);
@@ -107,7 +118,54 @@ public class EmployeePresentationImpl implements EmployeePresentation  {
 			else
 				System.out.println("Employee with id "+employeeId+" does not exist!");
 			break;
+			
 		case 7:
+			System.out.println("Enter Department Name : ");
+			
+			String dep=scanner.next();
+			
+			List<Employee> departmentWiseEmpList = employeeService.getEmployeesByDepartment(dep);
+			
+			if(departmentWiseEmpList.size() !=0) {
+				for(Employee e:departmentWiseEmpList) {
+					System.out.println(e);
+				}
+			}
+			else
+				System.out.println("No employee working in department : "+dep);
+			break;
+		case 8:
+			
+            List<Employee> employeesHighSalary = employeeService.getHighSalaryEmployees();
+            for (Employee employeeHighSalary: employeesHighSalary) {
+                System.out.println(employeeHighSalary);
+            }
+            break;
+			
+            case 9:
+            	
+                System.out.println("Enter Designation : ");
+    			String des=scanner.next();
+    			List<Employee> designationWiseEmpList=employeeService.searchByDesignation(des);
+    			if(designationWiseEmpList.size()!=0) {
+    				for(Employee e:designationWiseEmpList) {
+    					System.out.println(e);
+    				}
+    			}
+    			else
+    				System.out.println("No employee working as : "+des);
+    			break;	
+    			
+            case 10:
+    			System.out.println("Enter Employee name : ");
+    			String na=scanner.next();
+    			if(employeeService.deleteEmployeeByName(na))
+    				System.out.println("Employee Record Deleted");
+    			else
+    				System.out.println("Employee Record Not Deleted");
+    			break;
+            	
+		case 11:
 			System.out.println("Thanks for using Employee Management System");
 			System.exit(0);
 		default:

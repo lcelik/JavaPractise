@@ -1,6 +1,8 @@
 package com.sujata.service;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Collection;
+import java.util.List;
 
 //import jakarta.persistence.EntityNotFoundException;
 
@@ -28,20 +30,39 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employeeDao.findById(id).orElse(null);
 	}
 
+//	@Override
+//	public boolean addEmployee(Employee employee) {
+//		
+////		if(employeeDao.insertRecord(employee)>0)
+//		
+//		if(searchEmployeeById(employee.getEmpId()) == null) {
+//			
+//			// save means : save and update
+//			employeeDao.save(employee);
+//			
+//			return true;
+//		}
+//		return false;
+//	}
+	
 	@Override
 	public boolean addEmployee(Employee employee) {
-		
-//		if(employeeDao.insertRecord(employee)>0)
-		
-		if(searchEmployeeById(employee.getEmpId()) == null) {
-			
-			// save means : save and update
-			employeeDao.save(employee);
-			
+
+		try{
+			employeeDao.insertEmployee(employee.getEmpId(), employee.getEmpName(), employee.getEmpDesignation(),
+					employee.getEmpDepartment(), employee.getEmpSalary(), employee.getDateOfJoining()) ;
 			return true;
 		}
-		return false;
+		catch(SQLIntegrityConstraintViolationException ex) {
+			return false;
+		}
+		catch(Exception ex) {
+			return false;
+		}
 	}
+	
+	
+	
 
 	@Override
 	public boolean deleteEmployee(int id) {
@@ -55,19 +76,24 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return false;
 	}
 
+//	@Override
+//	public boolean incrementSalary(int id, double increment) {
+//	
+//		Employee employee = searchEmployeeById(id);
+//		
+//		if(employee!=null) {
+//			employee.setEmpSalary(employee.getEmpSalary() + increment);
+//			employeeDao.save(employee);
+//			return true;
+//		}
+//		return false;
+//	}
+	
 	@Override
 	public boolean incrementSalary(int id, double increment) {
-//		if(employeeDao.updateSalary(id,increment)>0)
-		
-		Employee employee = searchEmployeeById(id);
-		
-		if(employee!=null) {
-			employee.setEmpSalary(employee.getEmpSalary() + increment);
-			employeeDao.save(employee);
-			return true;
-		}
-		return false;
+		return employeeDao.updateSalary(id, increment) > 0;
 	}
+
 	
 
 	/*
@@ -94,4 +120,31 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return null;
 		
 	}
+
+	@Override
+	public List<Employee> getHighSalaryEmployees() {
+		return employeeDao.findByEmpSalaryGreaterThan(50000);
+	}
+	
+	@Override
+	public List<Employee> getEmployeesByDepartment(String deptt) {
+		
+		return employeeDao.findByEmpDepartment(deptt);
+	}
+
+	@Override
+	public List<Employee> searchByDesignation(String designation) {
+		return employeeDao.searchEmployeeByDesignation(designation);
+	}
+
+	@Override
+	public boolean deleteEmployeeByName(String name) {
+		
+		return employeeDao.deleteByName(name) > 0;
+	}
+
+	
+
+
+	
 }

@@ -1,6 +1,7 @@
 package com.sujata.service;
 
 import java.util.Collection;
+import java.util.List;
 
 import com.sujata.entity.Employee;
 import com.sujata.entity.EmployeePaySlip;
@@ -18,4 +19,15 @@ public interface EmployeeService {
 	boolean incrementSalary(int id,double increment);
 	
 	EmployeePaySlip generatePaySlip(int employeeId);
+	
+	List<Employee> getEmployeesByDepartment(String deptt);  
+	
+	List<Employee> getHighSalaryEmployees();
+	
+	List<Employee> searchByDesignation(String designation);
+	
+	boolean deleteEmployeeByName(String name);
+
+	
+
 }
