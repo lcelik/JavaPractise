@@ -11,5 +11,9 @@ public interface CustomerDao extends JpaRepository<Customer, Integer> {
 	//creating a query with the help of naming convention
 	
 	public Customer findCustomerByAccountIdAndCustomerPassword(int id, String password);
+	
+	public Customer getCustomerByCustomerName(String customerName);
+	
+	
 
 }

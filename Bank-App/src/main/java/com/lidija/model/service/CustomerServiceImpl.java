@@ -1,10 +1,15 @@
 package com.lidija.model.service;
 
+//import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lidija.entity.Customer;
+
 import com.lidija.model.persistence.CustomerDao;
+
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -51,6 +56,38 @@ public class CustomerServiceImpl implements CustomerService {
 			}
 		
 	}
+
+
+//	@Override
+//	public Customer getCustomerByCustomerName(String customerName) {
+//		return customerDao.getCustomerByCustomerName(customerName);
+//	}
+
+	@Override
+	public Collection<Customer> getAllCustomers() {
+		return customerDao.findAll();
+	}
+
+	@Override
+	public Customer getCustomerByCustomerId(String customerId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
+	//register
+//	@Override
+//	public Customer registerCustomer(Customer customer)  {
+//		if (getCustomerByCustomerName(customer.getCustomerName()) == null) {
+//			customerDao.save(customer);
+//			return customer;
+//		} else {
+//			return null;
+//		}
+//	}
+
+
+
+
 	
 }
